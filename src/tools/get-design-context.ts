@@ -54,7 +54,7 @@ export function registerGetDesignContext({
     },
     async ({ url }) => {
       // Parse the incoming Lanhu URL into the ids needed by downstream APIs.
-      let params: LanhuUrlParams;
+      let params: LanhuUrlParams & { docId: string };
       try {
         params = parseLanhuUrl(url);
       } catch (error) {

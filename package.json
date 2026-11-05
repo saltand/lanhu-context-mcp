@@ -1,18 +1,18 @@
 {
-  "name": "lanhu-context-mcp",
+  "name": "@saltand/lanhu-context-mcp",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "packageManager": "pnpm@10.33.0",
   "description": "Turn a Lanhu design into context for AI to generate code and recreate pages",
-  "author": "REFINIST",
+  "author": "saltand",
   "license": "MIT",
-  "homepage": "https://github.com/refinist/lanhu-context-mcp#readme",
+  "homepage": "https://github.com/saltand/lanhu-context-mcp#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/refinist/lanhu-context-mcp.git"
+    "url": "git+https://github.com/saltand/lanhu-context-mcp.git"
   },
   "bugs": {
-    "url": "https://github.com/refinist/lanhu-context-mcp/issues"
+    "url": "https://github.com/saltand/lanhu-context-mcp/issues"
   },
   "keywords": [
     "lanhu",

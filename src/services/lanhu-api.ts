@@ -10,13 +10,21 @@ import type {
   DownloadImageRequest,
   LanhuApiResponse,
   LanhuDesignRequest,
+  LanhuProjectRequest,
+  ProjectImage,
+  ProjectImagesResult,
+  ProjectSector,
   SchemaNode
 } from '../types/lanhu.ts';
 
 export type {
   DesignMeta,
   DownloadImageRequest,
-  LanhuDesignRequest
+  LanhuDesignRequest,
+  LanhuProjectRequest,
+  ProjectImage,
+  ProjectImagesResult,
+  ProjectSector
 } from '../types/lanhu.ts';
 
 // Lanhu reports business failures (invalid token, missing image, no access)
@@ -38,6 +46,57 @@ function unwrapEnvelope<T>(
       detail ? ` (${detail})` : ''
     }. Verify the Lanhu URL is complete (tid/pid/image_id must be full ids, not truncated) and LANHU_TOKEN is valid.`
   );
+}
+
+// Fetch the project's design-image list.
+// The Lanhu stage page calls this with dds_status=1, position=1,
+// show_cb_src=1, comment=1 — mirror that to get the full payload.
+export async function getProjectImages({
+  teamId,
+  projectId
+}: LanhuProjectRequest): Promise<ProjectImagesResult> {
+  const { data } = await client.get<
+    LanhuApiResponse<{
+      images?: ProjectImage[];
+      has_next?: boolean;
+      [key: string]: unknown;
+    }>
+  >('/api/project/images', {
+    params: {
+      team_id: teamId,
+      project_id: projectId,
+      dds_status: 1,
+      position: 1,
+      show_cb_src: 1,
+      comment: 1
+    }
+  });
+
+  const result = unwrapEnvelope(data, 'data', '/api/project/images');
+  return {
+    name: typeof result.name === 'string' ? result.name : undefined,
+    images: Array.isArray(result.images) ? result.images : [],
+    hasNext: result.has_next === true
+  };
+}
+
+// Fetch the project's sector (分组) tree.
+export async function getProjectSectors({
+  projectId
+}: LanhuProjectRequest): Promise<ProjectSector[]> {
+  const { data } = await client.get<
+    LanhuApiResponse<{
+      sectors?: ProjectSector[];
+      [key: string]: unknown;
+    }>
+  >('/api/project/project_sectors', {
+    params: {
+      project_id: projectId
+    }
+  });
+
+  const result = unwrapEnvelope(data, 'data', '/api/project/project_sectors');
+  return Array.isArray(result.sectors) ? result.sectors : [];
 }
 
 // Fetch raw design detail payload for a single image.

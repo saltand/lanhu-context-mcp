@@ -12,7 +12,7 @@ export const DEFAULT_ENV_FILE = '.env.local';
 
 export function getServerConfig(): ServerConfig {
   const argv = cli({
-    name: 'lanhu-context-mcp',
+    name: '@saltand/lanhu-context-mcp',
     flags: {
       lanhuToken: {
         type: String,
@@ -159,8 +159,8 @@ export function getServerConfig(): ServerConfig {
   if (!lanhuToken) {
     console.error(
       '[config] LANHU_TOKEN is required.\n' +
-        '  Via CLI:  npx lanhu-context-mcp --lanhu-token "<your token>"\n' +
-        '  Via env:  LANHU_TOKEN=<your token> npx lanhu-context-mcp\n' +
+        '  Via CLI:  npx @saltand/lanhu-context-mcp --lanhu-token "<your token>"\n' +
+        '  Via env:  LANHU_TOKEN=<your token> npx @saltand/lanhu-context-mcp\n' +
         `  Via file: add LANHU_TOKEN=<your token> to ${DEFAULT_ENV_FILE} in current directory`
     );
     process.exit(1);

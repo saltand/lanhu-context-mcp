@@ -2,7 +2,7 @@
 
 [简体中文](./README.md) | English
 
-[![npm](https://img.shields.io/npm/v/lanhu-context-mcp.svg?colorA=2878ff&colorB=000000)](https://npmjs.com/package/lanhu-context-mcp) [![downloads/month](https://img.shields.io/npm/dm/lanhu-context-mcp.svg?colorA=2878ff&colorB=000000)](https://npmjs.com/package/lanhu-context-mcp) [![Unit Test](https://img.shields.io/github/actions/workflow/status/refinist/lanhu-context-mcp/unit-test.yml?colorA=2878ff&colorB=000000&label=Unit%20Test)](https://github.com/refinist/lanhu-context-mcp/actions/workflows/unit-test.yml) [![codecov](https://img.shields.io/codecov/c/github/refinist/lanhu-context-mcp?colorA=2878ff&colorB=000000)](https://codecov.io/github/refinist/lanhu-context-mcp)
+[![npm](https://img.shields.io/npm/v/@saltand/lanhu-context-mcp.svg?colorA=2878ff&colorB=000000)](https://npmjs.com/package/@saltand/lanhu-context-mcp) [![downloads/month](https://img.shields.io/npm/dm/@saltand/lanhu-context-mcp.svg?colorA=2878ff&colorB=000000)](https://npmjs.com/package/@saltand/lanhu-context-mcp) [![Unit Test](https://img.shields.io/github/actions/workflow/status/refinist/lanhu-context-mcp/unit-test.yml?colorA=2878ff&colorB=000000&label=Unit%20Test)](https://github.com/refinist/lanhu-context-mcp/actions/workflows/unit-test.yml) [![codecov](https://img.shields.io/codecov/c/github/refinist/lanhu-context-mcp?colorA=2878ff&colorB=000000)](https://codecov.io/github/refinist/lanhu-context-mcp)
 
 ✨ Turns Lanhu designs into context for AI to generate code and recreate pages.
 
@@ -54,7 +54,7 @@ Claude Code（.mcp.json） / Cursor（.cursor/mcp.json）
   "mcpServers": {
     "lanhu-context-mcp": {
       "command": "npx",
-      "args": ["-y", "lanhu-context-mcp"]
+      "args": ["-y", "@saltand/lanhu-context-mcp"]
     }
   }
 }
@@ -67,7 +67,12 @@ TRAE (.trae/mcp.json)
   "mcpServers": {
     "lanhu-context-mcp": {
       "command": "npx",
-      "args": ["-y", "lanhu-context-mcp", "--cwd", "${workspaceFolder}"]
+      "args": [
+        "-y",
+        "@saltand/lanhu-context-mcp",
+        "--cwd",
+        "${workspaceFolder}"
+      ]
     }
   }
 }
@@ -79,7 +84,7 @@ Codex（.codex/config.toml）
 [mcp_servers.lanhu-context-mcp]
 cwd = "/absolute/path/to/current-project"
 command = "npx"
-args = ["-y", "lanhu-context-mcp"]
+args = ["-y", "@saltand/lanhu-context-mcp"]
 ```
 
 Qoder (global MCP service)
@@ -122,7 +127,7 @@ Claude Code (`.mcp.json`) / Cursor (`.cursor/mcp.json`)
   "mcpServers": {
     "lanhu-context-mcp": {
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "lanhu-context-mcp"]
+      "args": ["/c", "npx", "-y", "@saltand/lanhu-context-mcp"]
     }
   }
 }
@@ -154,7 +159,7 @@ Codex (WSL2)
 [mcp_servers.lanhu-context-mcp]
 cwd = "/absolute/path/to/current-project"
 command = "npx"
-args = ["-y", "lanhu-context-mcp"]
+args = ["-y", "@saltand/lanhu-context-mcp"]
 ```
 
 Codex (Native)
@@ -163,7 +168,7 @@ Codex (Native)
 [mcp_servers.lanhu-context-mcp]
 cwd = "C:\\absolute\\path\\to\\current-project"
 command = "C:\\Program Files\\nodejs\\npx.cmd"
-args = ["-y", "lanhu-context-mcp"]
+args = ["-y", "@saltand/lanhu-context-mcp"]
 
 [mcp_servers.lanhu-context-mcp.env]
 APPDATA = "C:\\Users\\{your-name}\\AppData\\Roaming"

@@ -1,6 +1,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import pkg from '../package.json' with { type: 'json' };
 import { registerGetDesignContext } from './tools/get-design-context.ts';
+import { registerListProjectDesigns } from './tools/list-project-designs.ts';
 import type { ServerConfig } from './types/config.ts';
 
 export function createMcpServer(config: ServerConfig): McpServer {
@@ -10,6 +11,7 @@ export function createMcpServer(config: ServerConfig): McpServer {
   });
 
   registerGetDesignContext({ server, config });
+  registerListProjectDesigns({ server, config });
 
   return server;
 }

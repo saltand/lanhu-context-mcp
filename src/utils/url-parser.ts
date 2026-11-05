@@ -1,8 +1,8 @@
 import type { LanhuUrlParams } from '../types/lanhu.ts';
 
-// Parse a Lanhu design detail URL like:
-// https://lanhuapp.com/web/#/item/project/detailDetach?tid=...&pid=...&image_id=...
-export function parseLanhuUrl(url: string): LanhuUrlParams {
+// Parse the raw param string (or a full Lanhu URL) into Lanhu ids.
+// Any form works: full URL, fragment query (?tid=..&pid=..), or bare params.
+export function parseLanhuParams(url: string): LanhuUrlParams {
   let paramStr = url;
 
   // Extract the fragment query when a full URL is provided.
@@ -43,11 +43,21 @@ export function parseLanhuUrl(url: string): LanhuUrlParams {
   if (!teamId) {
     throw new Error('URL parsing failed: missing required param tid (team_id)');
   }
-  if (!docId) {
+
+  return { teamId, projectId, docId, versionId };
+}
+
+// Parse a Lanhu design detail URL like:
+// https://lanhuapp.com/web/#/item/project/detailDetach?tid=...&pid=...&image_id=...
+// Requires image_id/docId on top of the project params.
+export function parseLanhuUrl(url: string): LanhuUrlParams & { docId: string } {
+  const params = parseLanhuParams(url);
+
+  if (!params.docId) {
     throw new Error(
       'URL parsing failed: missing required param image_id (docId)'
     );
   }
 
-  return { teamId, projectId, docId, versionId };
+  return params as LanhuUrlParams & { docId: string };
 }
