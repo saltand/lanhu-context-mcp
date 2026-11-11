@@ -251,6 +251,7 @@ Fields:
 | Field            | Required              | Purpose                                                                                                                          |
 | ---------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `LANHU_TOKEN`    | Yes                   | Token for calling the Lanhu API. On a logged-in Lanhu page, right-click a layer and use Lanhu Helper’s “复制 Token” (Copy Token) |
+| `LANHU_TID`      | No                    | Default Lanhu team id, used when the URL has no `tid`. A `tid` in the URL takes precedence                                       |
 | `LANHU_TEST_URL` | For integration tests | A real, reachable Lanhu design detail URL the integration test harness will hit                                                  |
 
 ### 3. Three-tier verification matrix

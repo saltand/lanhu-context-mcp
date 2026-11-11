@@ -30,7 +30,9 @@ export function parseLanhuParams(url: string): LanhuUrlParams {
     }
   }
 
-  const teamId = params.tid;
+  // Fall back to LANHU_TID so URLs copied without tid (Lanhu dropped it from
+  // some address bars) still work. A tid in the URL always wins.
+  const teamId = params.tid || process.env.LANHU_TID?.trim() || undefined;
   const projectId = params.pid || params.project_id;
   const docId = params.docId || params.image_id;
   const versionId = params.versionId;
@@ -41,7 +43,9 @@ export function parseLanhuParams(url: string): LanhuUrlParams {
     );
   }
   if (!teamId) {
-    throw new Error('URL parsing failed: missing required param tid (team_id)');
+    throw new Error(
+      'URL parsing failed: missing required param tid (team_id). Add tid to the URL or set the LANHU_TID env var.'
+    );
   }
 
   return { teamId, projectId, docId, versionId };

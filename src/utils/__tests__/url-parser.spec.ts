@@ -96,3 +96,29 @@ describe('parseLanhuUrl — short format', () => {
     expect(r.docId).toBe('i3');
   });
 });
+
+describe('parseLanhuUrl — LANHU_TID fallback', () => {
+  const URL_NO_TID =
+    'https://lanhuapp.com/web/#/item/project/detailDetach?pid=p1&image_id=i1';
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  test('uses LANHU_TID when the URL has no tid', () => {
+    vi.stubEnv('LANHU_TID', 'env-team');
+    expect(parseLanhuUrl(URL_NO_TID).teamId).toBe('env-team');
+  });
+
+  test('tid in the URL wins over LANHU_TID', () => {
+    vi.stubEnv('LANHU_TID', 'env-team');
+    expect(parseLanhuUrl('tid=url-team&pid=p1&image_id=i1').teamId).toBe(
+      'url-team'
+    );
+  });
+
+  test('blank LANHU_TID still throws missing tid', () => {
+    vi.stubEnv('LANHU_TID', '  ');
+    expect(() => parseLanhuUrl(URL_NO_TID)).toThrow(/tid/);
+  });
+});
